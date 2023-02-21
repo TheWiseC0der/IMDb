@@ -59,7 +59,13 @@
         </div>
         <div class="col-sm-4 py-2">
             <div class="card h-100 card-body">
+                <div class="h-100">
                 <canvas id="line-chart"></canvas>
+                </div>
+                <p>eerste kwartiel: <br />
+                   mediaan: <br />
+                   derde kwartiel:<br/>
+                   gemiddelde:</p>
             </div>
         </div>
     </div>
@@ -67,7 +73,7 @@
 @*here i include chart.js for graphs in our application*@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
-    var xValues = [20016, 2017, 2018, 2019, 2020, 2021, 2022];
+    var xValues = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
 
     new Chart(document.getElementById("bar-chart"), {
         type: 'bar',
@@ -86,7 +92,7 @@
             legend: { display: false },
             title: {
                 display: true,
-                text: 'number of movies per category in db'
+                text: 'number of movies released per category per year for 6 years'
             }
         }
     });

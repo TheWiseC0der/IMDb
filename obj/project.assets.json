@@ -855,19 +855,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nigel\\.nuget\\packages\\": {}
+    "C:\\Users\\bryan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\IMDb\\IMDb.csproj",
+      "projectUniqueName": "C:\\Users\\bryan\\source\\repos\\IMDb\\IMDb\\IMDb.csproj",
       "projectName": "IMDb",
-      "projectPath": "C:\\IMDb\\IMDb.csproj",
-      "packagesPath": "C:\\Users\\nigel\\.nuget\\packages\\",
-      "outputPath": "C:\\IMDb\\obj\\",
+      "projectPath": "C:\\Users\\bryan\\source\\repos\\IMDb\\IMDb\\IMDb.csproj",
+      "packagesPath": "C:\\Users\\bryan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bryan\\source\\repos\\IMDb\\IMDb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nigel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -928,8 +928,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -941,7 +940,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

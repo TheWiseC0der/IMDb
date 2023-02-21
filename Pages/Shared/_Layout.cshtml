@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - IMDb</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-
+    <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"></link>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IMDb.styles.css" asp-append-version="true" />
 </head>
@@ -17,7 +17,7 @@
 </style>
 <body data-bs-theme="dark">
     <header>
-        <nav class="navbar bg-body-tertiary fixed-top m-2">
+        <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand link-light" href="#">IMDb analytics</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -56,24 +56,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3 " style="padding-top: 64px;">
+    <main role="main" class="pb-3 " style="padding-top: 64px;">
             @RenderBody()
-        </main>
-    </div>
+    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - IMDb - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @*here i include chart.js for graphs in our application*@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -47,35 +47,30 @@
             </table>
         </div>
         <div class="card col-5 m-1">
-            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+            <canvas id="bar-chart" width="800" height="450"></canvas>
         </div>
     </div>
 </div>
+    @*here i include chart.js for graphs in our application*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
-    var xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
-
-    new Chart("myChart", {
-        type: "line",
+    new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
         data: {
-            labels: xValues,
-            datasets: [{
-                data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
-                borderColor: "red",
-                fill: false
-            }, {
-                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
-                borderColor: "green",
-                fill: false
-            }, {
-                data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
-                borderColor: "blue",
-                fill: false
-            }]
+            labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+            datasets: [
+                {
+                    label: "views (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                    data: [2478, 5267, 734, 784, 433]
+                }
+            ]
         },
         options: {
-            legend: { display: false }
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Predicted world population (millions) in 2050'
+            }
         }
-    });
-
-
-</script>
+    });</script>

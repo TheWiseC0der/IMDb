@@ -5,5 +5,77 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4 p-2">Welcome, your Dashboard is ready!</h1>
+    <div class="row">
+        <div class="card col-5 m-1">
+            <p>highest top 5 rated movies 2022</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">movie title</th>
+                        <th scope="col">rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>dark souls</td>
+                        <td>97%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>moana</td>
+                        <td>97%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>sharknado</td>
+                        <td>96%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>applebees the movie</td>
+                        <td>96%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>work harder</td>
+                        <td>95%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card col-5 m-1">
+            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        </div>
+    </div>
 </div>
+<script>
+    var xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
+    new Chart("myChart", {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+                borderColor: "red",
+                fill: false
+            }, {
+                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+                borderColor: "green",
+                fill: false
+            }, {
+                data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+                borderColor: "blue",
+                fill: false
+            }]
+        },
+        options: {
+            legend: { display: false }
+        }
+    });
+
+
+</script>

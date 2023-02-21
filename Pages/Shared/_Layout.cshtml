@@ -17,7 +17,7 @@
 </style>
 <body data-bs-theme="dark">
     <header>
-        <nav class="navbar bg-body-tertiary fixed-top m-2">
+        <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand link-light" href="#">IMDb analytics</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -56,11 +56,9 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3 " style="padding-top: 64px;">
+    <main role="main" class="pb-3 " style="padding-top: 64px;">
             @RenderBody()
-        </main>
-    </div>
+    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container">

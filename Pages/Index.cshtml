@@ -11,43 +11,9 @@
     <div class="row">
         <div class="col-sm-4 py-2">
             <div class="card card-body h-100">
-                <p>highest top 5 rated movies in db</p>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">movie title</th>
-                            <th scope="col">rating</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>dark souls</td>
-                            <td>97%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>moana</td>
-                            <td>97%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>sharknado</td>
-                            <td>96%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>applebees the movie</td>
-                            <td>96%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>work harder</td>
-                            <td>95%</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="h-100">
+                    <canvas id="record-chart"></canvas>
+                </div>
             </div>
         </div>
         <div class="col-sm-4 py-2">
@@ -60,12 +26,14 @@
         <div class="col-sm-4 py-2">
             <div class="card h-100 card-body">
                 <div class="h-100">
-                <canvas id="line-chart"></canvas>
+                    <canvas id="line-chart"></canvas>
                 </div>
-                <p>eerste kwartiel: <br />
-                   mediaan: <br />
-                   derde kwartiel:<br/>
-                   gemiddelde:</p>
+                <p>
+                    eerste kwartiel: <br />
+                    mediaan: <br />
+                    derde kwartiel:<br />
+                    gemiddelde:
+                </p>
             </div>
         </div>
     </div>
@@ -117,7 +85,7 @@
                 data: [300, 700, 2000, 5000, 6000, 4000, 2000],
                 borderColor: "blue",
                 fill: false
-                ,label: 'action'
+                , label: 'action'
             }]
         },
         options: {
@@ -128,4 +96,49 @@
                 text: 'number of views per category per year'
             }
         }
-    });</script>
+    });
+    var xValues = ["main titles", "alternative titles", "episodes", "people", "ratings"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
+
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "World Wide Wine Production 2018"
+            }
+        }
+    });
+    new Chart("record-chart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Records in db per table"
+            }
+        }
+    });
+
+
+</script>

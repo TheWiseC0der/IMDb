@@ -1,0 +1,113 @@
+﻿@page
+@model QuerierModel
+@{
+    ViewData["Title"] = "querier";
+}
+
+
+<div class="container-fluid text-center">
+    <h1 class="display-4 p-2">Querier page!</h1>
+    <p>Here you'll find a tool to query the database with a limited set of parameters</p>
+    <div class="row">
+        <div class="col-sm-4 py-2">
+            <div class="card card-body h-100">
+                <p>highest top 5 rated movies in db</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">movie title</th>
+                            <th scope="col">rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>dark souls</td>
+                            <td>97%</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>moana</td>
+                            <td>97%</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>sharknado</td>
+                            <td>96%</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>applebees the movie</td>
+                            <td>96%</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>work harder</td>
+                            <td>95%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@*here i include chart.js for graphs in our application*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+    var xValues = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
+
+    new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+            labels: ["horror", "family", "action", "comedy", "drama"],
+            datasets: [
+                {
+                    label: "movies in db of this category",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                    data: [2478, 5267, 734, 784, 433]
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'number of movies released per category per year for 6 years'
+            }
+        }
+    });
+
+
+
+    new Chart(document.getElementById("line-chart"), {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                data: [860, 1140, 1060, 1060, 1070, 1110, 1330],
+                borderColor: "red",
+                fill: false,
+                label: 'horror'
+            }, {
+                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000],
+                borderColor: "green",
+                fill: false,
+                label: 'family'
+            }, {
+                data: [300, 700, 2000, 5000, 6000, 4000, 2000],
+                borderColor: "blue",
+                fill: false
+                ,label: 'action'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: { display: true },
+            title: {
+                display: true,
+                text: 'number of views per category per year'
+            }
+        }
+    });</script>

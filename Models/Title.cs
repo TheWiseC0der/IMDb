@@ -1,13 +1,18 @@
-﻿namespace IMDb.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace IMDb.Models
 {
     public class Title
     {
-        public string TitleID { get; set; }
-        public string titleType { get; set; }
-        public string primaryTitle { get; set; }
-        public bool isAdult { get; set; }
-        public int startYear { get; set; }
-        public int runtimeMinutes { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string titleid { get; set; }
+        public string titletype { get; set; }
+        public string primarytitle { get; set; }
+        public bool isadult { get; set; }
+        public int startyear { get; set; }
+        public int runtimeminutes { get; set; }
 
     }
 }

@@ -23,7 +23,8 @@ namespace IMDb.Pages
         {
             moviecount = await _crudRepo.CountAllRows<movie>();
             Predicate<movie> match = m => m.startyear > 1996; 
-            movies = await _crudRepo.FindRowsWithValue(match);
+            //example of inner join:
+            //movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
         }   
     }
 }

@@ -8,6 +8,26 @@
 <div class="container-fluid text-center">
     <h1 class="display-4 p-2">Welcome, your Dashboard is ready!</h1>
     <p>Here you'll find relevant information about your database. all the statistics here are available on default</p>
+    <div class="card col-3 col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in @Model.movies)
+                {
+                    <tr>
+                        <td>@movie.primarytitle</td>
+                        <td>@movie.startyear</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
     <div class="row">
         <div class="col-sm-4 py-2">
             <div class="card card-body h-100">

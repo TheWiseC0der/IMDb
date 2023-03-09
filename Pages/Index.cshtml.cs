@@ -11,6 +11,7 @@ namespace IMDb.Pages
         private readonly ILogger<IndexModel> _logger;
 
         public int moviecount;
+        public List<movie> movies = new List<movie>();
 
         public IndexModel(ILogger<IndexModel> logger, CrudRepository crudRepo)
         {
@@ -21,6 +22,8 @@ namespace IMDb.Pages
         public async Task OnGet()
         {
             moviecount = await _crudRepo.CountAllRows<movie>();
+            Predicate<movie> match = m => m.startyear > 1996; 
+            movies = await _crudRepo.FindRowsWithValue(match);
         }   
     }
 }

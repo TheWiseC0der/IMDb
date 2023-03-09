@@ -4,7 +4,9 @@ using static IMDb.Repositories.PropertyRepository;
 using static IMDb.Repositories.GeneralRepository;
 using static IMDb.Repositories.LinqRepository;
 using IMDb.Database;
-
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace IMDb.Repositories
 {
     public class CrudRepository
@@ -115,9 +117,9 @@ namespace IMDb.Repositories
             await Template(context =>
                 obj.ForEach(x =>
                 {
-                //check if keys have to be set
+                    //check if keys have to be set
                     if (setKeys) SetPrimaryKeysToDefault<T>(x, context);
-                //add to database
+                    //add to database
                     context.Add(x);
                 }));
 
@@ -131,9 +133,9 @@ namespace IMDb.Repositories
         public async Task AddRow<T>(T obj, bool setKeys = true) where T : class, new() =>
             await Template(context =>
             {
-            //check if keys have to be set
+                //check if keys have to be set
                 if (setKeys) SetPrimaryKeysToDefault<T>(obj, context);
-            //add row to database
+                //add row to database
                 context.Add(obj);
             });
 
@@ -157,6 +159,31 @@ namespace IMDb.Repositories
 
                 //save database changes
                 await context.SaveChangesAsync();
+            }
+        }
+
+        //innerJoin
+        public async Task<List<TResult>> InnerJoin<TLeft, TRight, TKey, TResult>(
+            Func<TLeft, TKey> leftKeySelector,
+            Func<TRight, TKey> rightKeySelector,
+            Func<TLeft, TRight, TResult> resultSelector) where TLeft : class where TRight : class where TResult : class
+        {
+            // Create a new scope for the database context
+            await using var scope = _serviceScopeFactory.CreateAsyncScope();
+            {
+                // Get the database context from the service provider
+                var context = scope.ServiceProvider.GetService<AuthDbContext>();
+
+                // Get the left and right entity sets
+                var leftSet = context.Set<TLeft>();
+                var rightSet = context.Set<TRight>();
+
+                // Execute the join query
+                var query = leftSet.Join(rightSet, leftKeySelector, rightKeySelector, resultSelector);
+                var result = query.ToList();
+
+                // Return the result
+                return result;
             }
         }
 

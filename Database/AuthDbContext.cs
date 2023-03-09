@@ -10,6 +10,8 @@ public class AuthDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<movie> titlemovie { get; set; }
+    public DbSet<tvmovie> titletvMovie { get; set; }
+    public DbSet<Serie> titletvSerie { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("imdb");

@@ -177,6 +177,17 @@ namespace IMDb.Repositories
             //return
             return result;
         }
+        public async Task<int> CountAllRows<T>() where T : class
+        {
+            //create new generic list
+            var result = 0;
+
+            //read all rows from database
+            await Template(context => { result = context.Set<T>().Count(); });
+
+            //return
+            return result;
+        }
 
         /// <summary>
         /// finds rows with supplied value

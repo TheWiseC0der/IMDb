@@ -2,7 +2,7 @@
 {
     public class Episode : Title
     {
-        public int seasonNumber;
-        public int episodeNumber;
+        public int? seasonNumber;
+        public int? episodeNumber;
     }
 }

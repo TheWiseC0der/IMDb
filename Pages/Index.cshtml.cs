@@ -10,7 +10,7 @@ namespace IMDb.Pages
         private readonly CrudRepository _crudRepo;
         private readonly ILogger<IndexModel> _logger;
         public List<movie>? movies { get; set; }
-        private int seriecount;
+        public int moviecount;
 
         public IndexModel(ILogger<IndexModel> logger, CrudRepository crudRepo)
         {
@@ -20,7 +20,8 @@ namespace IMDb.Pages
 
         public async Task OnGet()
         {
-           movies = await _crudRepo.FindRowsWithValue<movie>(movie => movie.isadult == true);
-        }
+            movies = await _crudRepo.ReadAllRows<movie>();
+            moviecount = movies.Count(); 
+        }   
     }
 }

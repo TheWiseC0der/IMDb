@@ -8,10 +8,6 @@
 <div class="container-fluid text-center">
     <h1 class="display-4 p-2">Welcome, your Dashboard is ready!</h1>
     <p>Here you'll find relevant information about your database. all the statistics here are available on default</p>
-    @foreach (var item in Model.movies)
-    {
-        <p>@item.primarytitle</p><br/>
-    }
     <div class="row">
         <div class="col-sm-4 py-2">
             <div class="card card-body h-100">
@@ -101,8 +97,8 @@
             }
         }
     });
-    var xValues = ["main titles", "alternative titles", "episodes", "people", "ratings"];
-    var yValues = [55, 49, 44, 24, 15];
+    var xValues = ["Normal movies in db"];
+    var yValues = [@Model.moviecount];
     var barColors = [
         "#b91d47",
         "#00aba9",

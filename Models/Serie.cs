@@ -2,6 +2,6 @@
 {
     public class Serie : Title
     {
-        public int endYear;
+        public int? endYear;
     }
 }

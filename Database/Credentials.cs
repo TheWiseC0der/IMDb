@@ -16,7 +16,7 @@ public class Credentials
         Password = "KdsLedEW";
         Host = "localhost";
         Port = 5432;
-        Database = "survento";
+        Database = "imdb";
 
         if (!File.Exists(@"config.json"))
         {

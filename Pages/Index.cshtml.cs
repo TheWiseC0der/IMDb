@@ -20,7 +20,7 @@ namespace IMDb.Pages
 
         public async Task OnGet()
         {
-           movies = await _crudRepo.FindRowsWithValue<movie>(movie => movie.isadult = true);
+           movies = await _crudRepo.FindRowsWithValue<movie>(movie => movie.isadult == true);
         }
     }
 }

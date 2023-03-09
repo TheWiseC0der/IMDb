@@ -37,6 +37,9 @@ public class Startup
             options.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
                 _ => "Dit is een verkeerde waarde voor dit veld.");
         });
+        //add db connection
+        services.AddDbContext<AuthDbContext>(options =>
+           options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
         services.AddEntityFrameworkNpgsql().AddDbContext<AuthDbContext>(opt =>
             opt.UseNpgsql(Config.ConnectionString));

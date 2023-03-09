@@ -1,6 +1,6 @@
 ﻿namespace IMDb.Models
 {
-    public class Movie : Title
+    public class movie : Title
     {
     }
 }

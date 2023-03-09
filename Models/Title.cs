@@ -8,11 +8,10 @@ namespace IMDb.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string titleid { get; set; }
-        public string titletype { get; set; }
         public string primarytitle { get; set; }
         public bool isadult { get; set; }
-        public int startyear { get; set; }
-        public int runtimeminutes { get; set; }
+        public int? startyear { get; set; }
+        public int? runtimeminutes { get; set; }
 
     }
 }

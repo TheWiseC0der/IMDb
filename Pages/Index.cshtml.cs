@@ -11,7 +11,7 @@ namespace IMDb.Pages
         private readonly ILogger<IndexModel> _logger;
 
         public int moviecount;
-        public List<movie> movies = new List<movie>();
+        public List<Movie> movies = new List<Movie>();
 
         public IndexModel(ILogger<IndexModel> logger, CrudRepository crudRepo)
         {
@@ -21,10 +21,11 @@ namespace IMDb.Pages
 
         public async Task OnGet()
         {
-            moviecount = await _crudRepo.CountAllRows<movie>();
-            Predicate<movie> match = m => m.startyear > 1996; 
+            moviecount = await _crudRepo.CountAllRows<Movie>();
+            Predicate<Movie> match = m => m.startYear > 1996; 
             //example of inner join:
-            //movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
+            // movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
+            movies = await _crudRepo.FindRowsWithValue<Movie>(movie => movie is {isAdult: true, startYear: > 2016});
         }   
     }
 }

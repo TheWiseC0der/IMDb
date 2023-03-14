@@ -18,6 +18,7 @@ namespace IMDb.Models
         public virtual List<IsDirectorFor> isdirectorfors { get; set; } = new();
         public virtual List<Principals> principals { get; set; } = new();
         public virtual List<HasGenre> hasgenres { get; set; } = new();
+        public virtual List<Rating> rating { get; set; } = new();
 
     }
 }

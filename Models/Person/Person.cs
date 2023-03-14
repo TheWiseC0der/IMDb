@@ -8,7 +8,7 @@ namespace IMDb.Models
     public class Person
     {
         [Key]
-        public int personId { get; set; }
+        public string personId { get; set; }
         public string personName { get; set; }
         public int? birthYear { get; set; }
         public int? deathYear { get; set; }

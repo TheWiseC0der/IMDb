@@ -6,7 +6,8 @@ namespace IMDb.Models.Title_Person;
 [Table("category")]
 public class Category
 {
-    [Key]
-    public string categoryId { get; set; }
+    [Key] public string categoryId { get; set; }
     public string categoryName { get; set; }
+
+    public virtual List<Principals> principals { get; set; } = new();
 }

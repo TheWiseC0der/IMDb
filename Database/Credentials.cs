@@ -12,11 +12,11 @@ public class Credentials
 
     public Credentials()
     {
-        Username = "Survento";
-        Password = "password123";
+        Username = "postgres";
+        Password = "KdsLedEW";
         Host = "localhost";
-        Port = 3306;
-        Database = "survento";
+        Port = 5432;
+        Database = "imdb";
 
         if (!File.Exists(@"config.json"))
         {

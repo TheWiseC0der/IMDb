@@ -2,7 +2,7 @@
 
 namespace IMDb.Models
 {
-    [Table("tvmovie")]
+    [Table("tvMovie")]
     public class TvMovie : Title
     {
     }

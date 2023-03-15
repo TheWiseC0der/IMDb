@@ -10,6 +10,6 @@ namespace IMDb.Models
         public int? seasonNumber { get; set; }
         public int? episodeNumber { get; set; }
         
-        public Serie? serie { get; set; }
+        public TvSerie? serie { get; set; }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace IMDb.Models;
 
-[Table("game")]
-public class Game : Title
+[Table("videoGame")]
+public class VideoGame : Title
 {
     
 }

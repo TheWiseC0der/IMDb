@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMDb.Models;
 
-[Table("hasprofession")]
+[Table("hasProfession")]
 public class HasProfession
 {
     [Key]

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IMDb.Database;
 
-public class AuthDbContext : IdentityDbContext<ApplicationUser>
+public class AuthDbContext : DbContext
 {
     public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
     {
@@ -17,13 +17,14 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Title> title { get; set; }
     public DbSet<Episode> episode { get; set; }
     public DbSet<AlsoKnownAs> alsoknownas { get; set; }
-    public DbSet<Film> film { get; set; }
-    public DbSet<Game> game { get; set; }
+    public DbSet<VideoGame> videogame { get; set; }
     public DbSet<Genre> genre { get; set; }
     public DbSet<HasGenre> hasgenre { get; set; }
     public DbSet<Rating> rating { get; set; }
     public DbSet<Region> region { get; set; }
-    public DbSet<Serie> serie { get; set; }
+    public DbSet<TvSerie> tvserie { get; set; }
+    public DbSet<TvSpecial> tvspecial { get; set; }
+    public DbSet<TvShort> tvshort { get; set; }
     public DbSet<Short> _short { get; set; }
     public DbSet<TvMovie> tvmovie { get; set; }
     public DbSet<Video> video { get; set; }
@@ -45,8 +46,6 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
         modelBuilder.HasDefaultSchema("imdb");
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Movie>().ToTable("movie");
-
 
         //
         //association keys

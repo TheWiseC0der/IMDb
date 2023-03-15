@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMDb.Models.Title_Person;
 
-[Table("isdirectorfor")]
+[Table("isDirectorFor")]
 public class IsDirectorFor
 {
     [Key]

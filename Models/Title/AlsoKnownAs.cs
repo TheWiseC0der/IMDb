@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMDb.Models;
 
-[Table("alsoknownas")]
+[Table("alsoKnownAs")]
 public class AlsoKnownAs
 {
     [Key]

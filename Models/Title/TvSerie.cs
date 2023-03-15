@@ -2,8 +2,9 @@
 
 namespace IMDb.Models
 {
-    [Table("film")]
-    public class Film : Title
+    [Table("tvSerie")]
+    public class TvSerie : Title
     {
+        public int? endYear;
     }
 }

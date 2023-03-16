@@ -1,6 +1,7 @@
 ﻿using IMDb.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using IMDb.Repositories;
 
 namespace IMDb;
 
@@ -36,6 +37,9 @@ public class Startup
             options.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
                 _ => "Dit is een verkeerde waarde voor dit veld.");
         });
+        //add db connection
+        services.AddDbContext<AuthDbContext>(options =>
+           options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
         services.AddEntityFrameworkNpgsql().AddDbContext<AuthDbContext>(opt =>
             opt.UseNpgsql(Config.ConnectionString));
@@ -71,17 +75,7 @@ public class Startup
 
         services.AddHttpContextAccessor();
 
-
-//dependencies
-// services.AddScoped<UserRepository>();
-// services.AddSingleton<FileRepository>();
-// services.AddSingleton<CrudRepository>();
-
-//cache
-// services.AddSingleton<CacheRepository>();
-
-//services;
-// services.AddScoped<UserRoleService>();
+        services.AddSingleton<CrudRepository>();
     }
 
 // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

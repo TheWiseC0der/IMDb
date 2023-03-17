@@ -5,6 +5,6 @@ namespace IMDb.Models
     [Table("tvSerie")]
     public class TvSerie : Title
     {
-        public int? endYear;
+        public int? endYear { get; set; }
     }
 }

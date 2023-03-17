@@ -41,9 +41,6 @@ public class Startup
         services.AddDbContext<AuthDbContext>(options =>
            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-        services.AddEntityFrameworkNpgsql().AddDbContext<AuthDbContext>(opt =>
-            opt.UseNpgsql(Config.ConnectionString));
-
         //custom rules for identity framework 
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {

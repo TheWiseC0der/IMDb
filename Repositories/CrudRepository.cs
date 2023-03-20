@@ -6,7 +6,9 @@ using static IMDb.Repositories.LinqRepository;
 using IMDb.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+
 namespace IMDb.Repositories
 {
     public class CrudRepository
@@ -204,6 +206,7 @@ namespace IMDb.Repositories
             //return
             return result;
         }
+
         public async Task<int> CountAllRows<T>() where T : class
         {
             //create new generic list
@@ -219,10 +222,11 @@ namespace IMDb.Repositories
         /// <summary>
         /// finds rows with supplied value
         /// </summary>
-        /// <param name="match"></param>
+        /// <param name="predicate"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>list of object class that have the supplied value in them</returns>
-        public async Task<List<T>> FindRowsWithValue<T>(Predicate<T> match) where T : class, new()
+        public async Task<List<T>> FindRowsWithValue<T>(Expression<Func<T, bool>> predicate, int limit = int.MaxValue)
+            where T : class, new()
         {
             //create new generic list
             var result = new List<T>();
@@ -231,7 +235,7 @@ namespace IMDb.Repositories
             await Template(context =>
             {
                 //fill result with all of the found values
-                result = context.Set<T>().ToList().Where(x => match(x)).ToListOrDefault();
+                result = context.Set<T>().Where(predicate).Take(limit).ToListOrDefault();
             });
 
             //return
@@ -241,10 +245,10 @@ namespace IMDb.Repositories
         /// <summary>
         /// finds row with supplied value
         /// </summary>
-        /// <param name="match"></param>
+        /// <param name="predicate"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>list of object class that have the supplied value in them</returns>
-        public async Task<T> FindRowWithValue<T>(Predicate<T> match) where T : class, new()
+        public async Task<T> FindRowWithValue<T>(Expression<Func<T, bool>> predicate) where T : class, new()
         {
             //create new generic list
             var result = new T();
@@ -253,7 +257,7 @@ namespace IMDb.Repositories
             await Template(context =>
             {
                 //finds the first result, or sets result to null
-                result = context.Set<T>().ToList().FirstOrDefault(x => match(x));
+                result = context.Set<T>().FirstOrDefault(predicate);
             });
 
             //return result
@@ -267,5 +271,4 @@ namespace IMDb.Repositories
         /// <returns>generic class type</returns>
         public T? FindClosestToDate<T>() where T : class => ReadAllRows<T>().Result.GetClosestDate();
     }
-
 }

@@ -28,19 +28,19 @@ namespace IMDb.Pages
             //example of inner join:
             // movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
             // movies = await _crudRepo.FindRowsWithValue<Movie>(movie => movie.isAdult && movie.startYear > 2016, 5);
-
-            genres = await _crudRepo.Query(DbContext => genres.Select(g => new Genre()
-            {
-                genreName = g.genreName,
-                avgRating = g.hasgenres.Average(hg => hg.title.rating.averageRating)
-            }).Take(1).ToListOrNull());
+            //
+            // genres = await _crudRepo.Query(DbContext => DbContext.genre.Select(g => new Genre()
+            // {
+            //     genreName = g.genreName,
+            //     avgRating = g.hasgenres.Average(hg => hg.title.rating.averageRating)
+            // }).ToListOrDefault());
             
-            // genres = await _crudRepo.Query(dbContext => dbContext.genre.Select(g =>
-            //     new Genre()
-            //     {
-            //         genreName = g.genreName,
-            //         titleCount = g.hasgenres.Count()
-            //     }).ToList());
+            genres = await _crudRepo.Query(dbContext => dbContext.genre.Select(g =>
+                new Genre()
+                {
+                    genreName = g.genreName,
+                    titleCount = g.hasgenres.Count()
+                }).ToList());
         }
     }
 }

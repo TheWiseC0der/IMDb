@@ -39,14 +39,8 @@
         <div class="col-sm-4 py-2">
             <div class="card h-100 card-body">
                 <div class="h-100">
-                    <canvas id="line-chart"></canvas>
+                    <canvas id="Genre-Rating"></canvas>
                 </div>
-                <p>
-                    eerste kwartiel: <br/>
-                    mediaan: <br/>
-                    derde kwartiel:<br/>
-                    gemiddelde:
-                </p>
             </div>
         </div>
     </div>
@@ -97,36 +91,29 @@ const randColor = () =>  {
 
 
 
-    new Chart(document.getElementById("line-chart"), {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-                data: [860, 1140, 1060, 1060, 1070, 1110, 1330],
-                borderColor: "red",
-                fill: false,
-                label: 'horror'
-            }, {
-                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000],
-                borderColor: "green",
-                fill: false,
-                label: 'family'
-            }, {
-                data: [300, 700, 2000, 5000, 6000, 4000, 2000],
-                borderColor: "blue",
-                fill: false
-                , label: 'action'
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            legend: { display: true },
-            title: {
-                display: true,
-                text: 'number of views per category per year'
+    new Chart(document.getElementById("Genre-Rating"), {
+      type: 'bar',
+            data: {
+                
+                labels: [  "Action",  "Adult",  "Adventure",  "Animation",  "Biography",  "Comedy",  "Crime",  "Documentary",  "Drama",  "Family",  "Fantasy",  "Film-Noir",  "Game-Show",  "History",  "Horror",  "Music",  "Musical",  "Mystery",  "News",  "Reality-TV",  "Romance",  "Sci-Fi",  "Short",  "Sport",  "Talk-Show",  "Thriller",  "War",  "Western"],
+                datasets: [
+                    {
+                        label: "movies in db of this category",
+                        backgroundColor: xColors,
+                        data: [  6.9548260047158603,  6.3853054911059406,  7.0501656548633385,  7.0813475414535976,  7.1731594585671798,  6.937440780746492,  7.0957297329120124,  7.2379703689008172,  6.9876011898273207,  7.0804801927342016,  7.0077351772537133,  6.5021226415094464,  6.8911806753759048,  7.3083091522233889,  6.0792107513092093,  7.0387509573653571,  6.4996567954501066,  7.1292489776488983,  6.56722325817932,  6.019933554817275,  6.7794874507284996,  6.8139626257813184,  6.7820800015452734,  6.7921782070414585,  6.7791922915137781,  7.0102543554006969,  6.8898817677965397],
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'number of movies released per category per year for 6 years'
+                }
             }
-        }
-    });
+        });
+
     var xValues = ["Normal movies in db"];
     var yValues = [@Model.moviecount  ];
     var barColors = [

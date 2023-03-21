@@ -1,0 +1,128 @@
+﻿@page
+@model QueryModel
+@{
+    ViewData["Title"] = "Query";
+}
+
+
+<div class="container-fluid text-center">
+    <h1 class="display-4 p-2">Query page!</h1>
+    <p>Here you'll find a tool to query the database with a limited set of parameters</p>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+    var subjectObject = {
+      "Actor": {
+        "Movie": ["Genre", "Images", "Tables", "Lists"],
+        "Serie": ["Borders", "Margins", "Backgrounds", "Float"],
+        "Both": ["Variables", "Operators", "Functions", "Conditions"]    
+      },
+      "Movie": {
+        "Genre": ["Variables", "Strings", "Arrays"],
+        
+      },
+      "Serie": {
+          }
+    }
+    window.onload = function() {
+      var subjectSel = document.getElementById("subject");
+      var topicSel = document.getElementById("topic");
+      var chapterSel = document.getElementById("chapter");
+      for (var x in subjectObject) {
+        subjectSel.options[subjectSel.options.length] = new Option(x, x);
+      }
+      subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+     topicSel.length = 1;
+        //display correct values
+        for (var y in subjectObject[this.value]) {
+          topicSel.options[topicSel.options.length] = new Option(y, y);
+        }
+      }
+      topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+        //display correct values
+        var z = subjectObject[subjectSel.value][this.value];
+        for (var i = 0; i < z.length; i++) {
+          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+        }
+      }
+    }
+    </script>
+    <form method="post" name="form1" id="form1">
+    Subjects: <select name="subject" id="subject">
+        <option value="" selected="selected">Select subject</option>
+      </select>
+      <br><br>
+    Types: <select name="topic" id="topic">
+        <option value="" selected="selected">Please select subject first</option>
+      </select>
+      <br><br>
+    Genres: <select name="chapter" id="chapter">
+        <option value="" selected="selected">Please select topic first</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Submit">  
+    </form>
+</div>
+
+@*here i include chart.js for graphs in our application*@
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+    var xValues = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
+
+    new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+            labels: ["horror", "family", "action", "comedy", "drama"],
+            datasets: [
+                {
+                    label: "movies in db of this category",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                    data: [2478, 5267, 734, 784, 433]
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'number of movies released per category per year for 6 years'
+            }
+        }
+    });
+
+
+
+    new Chart(document.getElementById("line-chart"), {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                data: [860, 1140, 1060, 1060, 1070, 1110, 1330],
+                borderColor: "red",
+                fill: false,
+                label: 'horror'
+            }, {
+                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000],
+                borderColor: "green",
+                fill: false,
+                label: 'family'
+            }, {
+                data: [300, 700, 2000, 5000, 6000, 4000, 2000],
+                borderColor: "blue",
+                fill: false
+                ,label: 'action'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: { display: true },
+            title: {
+                display: true,
+                text: 'number of views per category per year'
+            }
+        }
+    });</script>*@

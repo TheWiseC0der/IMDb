@@ -145,7 +145,7 @@ namespace IMDb.Repositories
         /// Template for using the database
         /// </summary>
         /// <param name="action"></param>
-        private async Task Template(Action<DbContext>? action = default)
+        private async Task Template(Action<AuthDbContext>? action = default)
         {
             //using serviceScopeFactory to create a scope of AuthDbContext
             await using var scope = _serviceScopeFactory.CreateAsyncScope();
@@ -237,6 +237,24 @@ namespace IMDb.Repositories
                 //fill result with all of the found values
                 result = context.Set<T>().Where(predicate).Take(limit).ToListOrDefault();
             });
+
+            //return
+            return result;
+        }
+
+        /// <summary>
+        ///     reads all rows from the database
+        ///     from generic class type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>list of rows</returns>
+        public async Task<dynamic?> Query(Func<AuthDbContext, dynamic?> func)
+        {
+            //create new generic list
+            dynamic? result = null;
+
+            //read all rows from database
+            await Template(context => result = func(context));
 
             //return
             return result;

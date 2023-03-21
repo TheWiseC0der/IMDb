@@ -1,4 +1,5 @@
 ﻿@page
+@using IMDb.Models
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -11,21 +12,12 @@
     <div class="card col-3 col-md-10">
         <table class="table">
             <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">#</th>
-                </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">#</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var movie in @Model.movies)
-                {
-                    <tr>
-                        <td>@movie.titleId</td>
-                        <td>@movie.primaryTitle</td>
-                        <td>@movie.startYear</td>
-                    </tr>
-                }
-
             </tbody>
         </table>
     </div>
@@ -50,9 +42,9 @@
                     <canvas id="line-chart"></canvas>
                 </div>
                 <p>
-                    eerste kwartiel: <br />
-                    mediaan: <br />
-                    derde kwartiel:<br />
+                    eerste kwartiel: <br/>
+                    mediaan: <br/>
+                    derde kwartiel:<br/>
                     gemiddelde:
                 </p>
             </div>
@@ -62,17 +54,34 @@
 @*here i include chart.js for graphs in our application*@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
-    var xValues = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
+var xValues = [];
+var xLabels = [];
+var xColors = [];
+const randColor = () =>  {
+    return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+}
 
+</script>
+
+@foreach (Genre g in Model.genres)
+{
+    <script>
+    xColors.push(randColor());
+    xValues.push("@g.titleCount");
+    xLabels.push("@g.genreName");
+    </script>
+}
+<script>
     new Chart(document.getElementById("bar-chart"), {
         type: 'bar',
         data: {
-            labels: ["horror", "family", "action", "comedy", "drama"],
+            
+            labels: xLabels,
             datasets: [
                 {
                     label: "movies in db of this category",
-                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                    data: [2478, 5267, 734, 784, 433]
+                    backgroundColor: xColors,
+                    data: xValues
                 }
             ]
         },

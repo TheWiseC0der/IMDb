@@ -69,8 +69,7 @@ public class AuthDbContext : DbContext
         modelBuilder.Entity<Principals>().HasOne(x => x.category).WithMany(x => x.principals)
             .HasForeignKey(x => x.categoryId);
 
-        //rating
-        modelBuilder.Entity<Rating>().HasOne(x => x.title).WithMany(x => x.rating)
-            .HasForeignKey(x => x.titleId);
+        modelBuilder.Entity<Rating>().HasOne(rating => rating.title).WithOne(title => title.rating)
+            .HasForeignKey<Rating>(rating => rating.titleId);
     }
 }

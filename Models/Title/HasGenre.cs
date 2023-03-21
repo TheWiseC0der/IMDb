@@ -6,13 +6,10 @@ namespace IMDb.Models;
 [Table("hasGenre")]
 public class HasGenre
 {
-    [Key]
-    [ForeignKey("titleId")]
-    public string titleId { get; set; }
-    [Key]
-    [ForeignKey("genreId")]
-    public string genreId { get; set; }
-    
+    [Key] [ForeignKey("titleId")] public string titleId { get; set; }
+    [Key] [ForeignKey("genreId")] public string genreId { get; set; }
+
     public Title? title { get; set; }
     public Genre? genre { get; set; }
+
 }

@@ -39,7 +39,8 @@ public class Startup
         });
         //add db connection
         services.AddDbContext<AuthDbContext>(options =>
-           options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                options => options.CommandTimeout(60)));
 
         //custom rules for identity framework 
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>

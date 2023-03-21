@@ -6,12 +6,10 @@ namespace IMDb.Models
     [Table("rating")]
     public class Rating
     {
-        [Key]
-        [ForeignKey("titleId")]
-        public string titleId { get; set; }
+        [Key] [ForeignKey("titleId")] 
+        public string? titleId { get; set; }
+        public Title? title { get; set; }
         public double? averageRating { get; set; }
         public int? numVotes { get; set; }
-        
-        public Title? title { get; set; }
     }
 }

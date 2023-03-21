@@ -2,6 +2,8 @@
 using IMDb.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace IMDb.Pages
 {
@@ -11,7 +13,7 @@ namespace IMDb.Pages
         private readonly ILogger<IndexModel> _logger;
 
         public int moviecount;
-        public List<Movie> movies = new List<Movie>();
+        public List<Genre> genres = new();
 
         public IndexModel(ILogger<IndexModel> logger, CrudRepository crudRepo)
         {
@@ -25,7 +27,20 @@ namespace IMDb.Pages
             // Predicate<Movie> match = m => m.startYear > 1996; 
             //example of inner join:
             // movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
-            movies = await _crudRepo.FindRowsWithValue<Movie>(movie => movie.isAdult && movie.startYear > 2016, 5);
+            // movies = await _crudRepo.FindRowsWithValue<Movie>(movie => movie.isAdult && movie.startYear > 2016, 5);
+
+            genres = await _crudRepo.Query(DbContext => genres.Select(g => new Genre()
+            {
+                genreName = g.genreName,
+                avgRating = g.hasgenres.Average(hg => hg.title.rating.averageRating)
+            }).Take(1).ToListOrNull());
+            
+            // genres = await _crudRepo.Query(dbContext => dbContext.genre.Select(g =>
+            //     new Genre()
+            //     {
+            //         genreName = g.genreName,
+            //         titleCount = g.hasgenres.Count()
+            //     }).ToList());
         }
     }
 }

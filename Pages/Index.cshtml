@@ -67,7 +67,7 @@ const randColor = () =>  {
 }
 <script>
     new Chart(document.getElementById("bar-chart"), {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
             
             labels: xLabels,
@@ -80,6 +80,11 @@ const randColor = () =>  {
             ]
         },
         options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    },
+            },
             maintainAspectRatio: false,
             legend: { display: false },
             title: {
@@ -92,7 +97,7 @@ const randColor = () =>  {
 
 
     new Chart(document.getElementById("Genre-Rating"), {
-      type: 'bar',
+      type: 'horizontalBar',
             data: {
                 
                 labels: [  "Action",  "Adult",  "Adventure",  "Animation",  "Biography",  "Comedy",  "Crime",  "Documentary",  "Drama",  "Family",  "Fantasy",  "Film-Noir",  "Game-Show",  "History",  "Horror",  "Music",  "Musical",  "Mystery",  "News",  "Reality-TV",  "Romance",  "Sci-Fi",  "Short",  "Sport",  "Talk-Show",  "Thriller",  "War",  "Western"],
@@ -105,6 +110,11 @@ const randColor = () =>  {
                 ]
             },
             options: {
+            scales: {
+                x: {
+                  beginAtZero: true,
+                   },
+                },
                 maintainAspectRatio: false,
                 legend: { display: false },
                 title: {

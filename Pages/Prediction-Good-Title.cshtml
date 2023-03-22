@@ -1,0 +1,46 @@
+@page
+@model IMDb.Pages.Prediction_Good_Title
+
+@{
+    Layout = null;
+}
+<script>
+function calculate_model() {
+  const runtime_minutes = document.getElementById("runtime_minutes").value;
+  const avg_rating_movie_actors = document.getElementById("avg_rating_movie_actors").value;
+  const genre_count = document.getElementById("genre_count").value;
+  const avg_actor_age = document.getElementById("avg_actor_age").value;
+  const region_count = document.getElementById("region_count").value;
+  const p = 1 / (1 + (Math.pow(Math.E,
+   -( -3.470402029 + 0.006066371 * runtime_minutes
+    + 0.077065049 * avg_rating_movie_actors
+    - 0.185253895 * genre_count
+    - 0.027784449 * avg_actor_age
+    + 0.048970622 * region_count))));
+  document.getElementById("output").innerText = p > 0.05 ? "Good" : "Bad u do will not do anything good in life";
+}
+
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <p id="output"></p>
+    <p>runtime minutes</p>
+    <input type="number" min="0" step="1" id="runtime_minutes"/>
+    <p>avg rating movie actors</p>
+    <input type="number" min="0" step="0.1" id="avg_rating_movie_actors"/>
+    <p>genre count</p>
+    <input type="number" min="0" step="1" id="genre_count"/>
+    <p>avg actor age</p>
+    <input type="number" min="0" step="0.1" id="avg_actor_age"/>
+    <p>region count</p>
+    <input type="number" min="0" step="1" id="region_count"/>
+    <input type="button" value="submit" onclick="calculate_model()"/>
+</div>
+</body>
+</html>

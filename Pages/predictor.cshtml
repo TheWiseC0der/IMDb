@@ -74,7 +74,7 @@
 
             </div>
         </div>
-        <div class="card">
+        <div class="card m-1">
             <div class="card-body">
                 <h1>information</h1>
                 here you can find information about the data used to train this model and the training it self.
@@ -148,12 +148,71 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>SUCCESS</th>
-                            <td colspan="6">Mode: logical</td>
+                            <td>SUCCESS</td>
+                            <td colspan="3">Mode: logical</td>
+                            <td colspan="2">TRUE :57 </td>
+                            <td colspan="2">FALSE:1143 </td>
                         </tr>
                     </tfoot>
                 </table>
+                <p>roc curve</p>
+                <img src="/images/roc.png" style="max-width: 80%; display: block" />
+                The ROC curve shows the relationship between the true positive rate (TPR) and the false positive rate (FPR) at different thresholds for classifying the model's predicted probabilities as positive or negative.<br />
+                TPR(true positive rate) is the percentage of correctly identified positive cases and FPR(false positive rate) is the percentage of falsely identified negative cases.
+                <img src="/images/model_summary.png" style="max-width: 80%; display: block" />
+                <p>
+                    AIC stands for Akaike's Information Criterion, and is a simple way to evaluate the quality of our model.<br />
+                    the lower the AIC the better the model is.
+                    also, you can see the significance of the undependent variabels on the model in the picture below.
+                    the '*' or '.' are indicating the level of significance of each independent variabel.
+                </p>
+                the data was split in uneven sets, 70% for training and 30% for validation.
+                the split dataset's, train and predict, had the same ratio of true to false observations.
+                <h2>Trueth table for train</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>FALSE</th>
+                            <th>TRUE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FALSE</td>
+                            <td>612</td>
+                            <td>188</td>
+                        </tr>
+                        <tr>
+                            <td>TRUE</td>
+                            <td>13</td>
+                            <td>27</td>
+                        </tr>
+                    </tbody>
                 </table>
+                <h2>Trueth tabel for test</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>FALSE</th>
+                            <th>TRUE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FALSE</td>
+                            <td>264</td>
+                            <td>79</td>
+                        </tr>
+                        <tr>
+                            <td>TRUE</td>
+                            <td>5</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>The Trueth table can be very handy for determining the quality of your model.</p>
             </div>
         </div>
     </div>

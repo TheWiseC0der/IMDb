@@ -3,111 +3,158 @@
 @{
     ViewData["Title"] = "predicator";
 }
-
-
-<div class="container-fluid text-center">
-    <h1 class="display-4 p-2">Predictor Tool!</h1>
-    <p>Here you'll find a tool to use lineair regression models to generate specific predictions for your target</p>
+<script>
+    function calculate_model() {
+        const runtime_minutes = document.getElementById("runtime_minutes").value;
+        const avg_rating_movie_actors = document.getElementById("avg_rating_movie_actors").value;
+        const genre_count = document.getElementById("genre_count").value;
+        const avg_actor_age = document.getElementById("avg_actor_age").value;
+        const region_count = document.getElementById("region_count").value;
+        const actors_avg_count_played_successful_titles = document.getElementById("actors_avg_count_played_successful_titles").value;
+        const p = 1 / (1 + (Math.pow(Math.E,
+            -(-7.394061529 + 0.015309283 * runtime_minutes
+                + 0.380394951 * avg_rating_movie_actors
+                - 0.175780790 * genre_count
+                - 0.009272853 * avg_actor_age
+                + 0.042842778 * region_count
+                + 0.061651858 * actors_avg_count_played_successful_titles))));
+        document.getElementById("output").value = p > 0.05 ? "Good" : "Bad";
+        if (p > 0.05)
+            document.getElementById("output").style.backgroundColor = "green";
+        else
+            document.getElementById("output").style.backgroundColor = "red";
+    }
+</script>
+<div class="container">
     <div class="row">
-        <div class="col-sm-4 py-2">
-            <div class="card card-body h-100">
-                <p>highest top 5 rated movies in db</p>
-                <table class="table">
+        <div class="card text-center m-1">
+            <h1>predictor tool</h1>
+            <p>Threshold: 0.05</p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">prediction:</span>
+                <input disabled id="output" type="text" class="form-control text-black" aria-describedby="basic-addon1">
+            </div><br /><br />
+
+            <div class="row align-content-center justify-content-center">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">runtime minutes</span>
+                        <input id="runtime_minutes" type="number" class="form-control" placeholder="Username" aria-label="runtime minutes" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2">avg_rating_movie_actors</span>
+                        <input id="avg_rating_movie_actors" type="text" class="form-control" placeholder="avg_rating_movie_actors" aria-describedby="basic-addon2">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">genre_count</span>
+                        <input id="genre_count" type="text" class="form-control" placeholder="genre_count" aria-label="Username" aria-describedby="basic-addon3">
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon4">region_count</span>
+                        <input id="region_count" type="text" class="form-control" placeholder="region_count" aria-label="region_count" aria-describedby="basic-addon4">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon5">avg_actor_age</span>
+                        <input id="avg_actor_age" type="text" class="form-control" placeholder="avg_actor_age" aria-label="avg_actor_age" aria-describedby="basic-addon5">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon6">actors_avg_count_played_successful_titles </span>
+                        <input id="actors_avg_count_played_successful_titles" type="text" class="form-control" placeholder="actors_avg_count_played_successful_titles " aria-label="actors_avg_count_played_successful_titles " aria-describedby="basic-addon6">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <input class="btn btn-primary m-1" type="button" value="submit" onclick="calculate_model()" />
+                </div>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h1>information</h1>
+                here you can find information about the data used to train this model and the training it self.
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">movie title</th>
-                            <th scope="col">rating</th>
+                            <th>Name</th>
+                            <th>Min</th>
+                            <th>1st Qu</th>
+                            <th>Median</th>
+                            <th>Mean</th>
+                            <th>3rd Qu</th>
+                            <th>Max</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>dark souls</td>
-                            <td>97%</td>
+                            <td>runtimeMinutes</td>
+                            <td>41</td>
+                            <td>69</td>
+                            <td>79</td>
+                            <td>83</td>
+                            <td>90</td>
+                            <td>281</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>moana</td>
-                            <td>97%</td>
+                            <td>actors_avg_count_played_successful_titles</td>
+                            <td>4.000</td>
+                            <td>5.000</td>
+                            <td>7.000</td>
+                            <td>8.292</td>
+                            <td>9.500</td>
+                            <td>37.000</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>sharknado</td>
-                            <td>96%</td>
+                            <td>genrecount</td>
+                            <td>1.000</td>
+                            <td>4.000</td>
+                            <td>5.000</td>
+                            <td>5.243</td>
+                            <td>6.500</td>
+                            <td>17.000</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>applebees the movie</td>
-                            <td>96%</td>
+                            <td>average_actor_age</td>
+                            <td>2.00</td>
+                            <td>27.00</td>
+                            <td>32.00</td>
+                            <td>33.58</td>
+                            <td>39.00</td>
+                            <td>59.00</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>work harder</td>
-                            <td>95%</td>
+                            <td>region_count</td>
+                            <td>1.00</td>
+                            <td>8.00</td>
+                            <td>13.00</td>
+                            <td>17.58</td>
+                            <td>22.00</td>
+                            <td>140.00</td>
+                        </tr>
+                        <tr>
+                            <td>avg_rating_movie_actors</td>
+                            <td>2.690</td>
+                            <td>6.585</td>
+                            <td>7.004</td>
+                            <td>6.869</td>
+                            <td>7.260</td>
+                            <td>9.310</td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>SUCCESS</th>
+                            <td colspan="6">Mode: logical</td>
+                        </tr>
+                    </tfoot>
+                </table>
                 </table>
             </div>
         </div>
     </div>
 </div>
-@*here i include chart.js for graphs in our application*@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script>
-    var xValues = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
-
-    new Chart(document.getElementById("bar-chart"), {
-        type: 'bar',
-        data: {
-            labels: ["horror", "family", "action", "comedy", "drama"],
-            datasets: [
-                {
-                    label: "movies in db of this category",
-                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                    data: [2478, 5267, 734, 784, 433]
-                }
-            ]
-        },
-        options: {
-            maintainAspectRatio: false,
-            legend: { display: false },
-            title: {
-                display: true,
-                text: 'number of movies released per category per year for 6 years'
-            }
-        }
-    });
-
-
-
-    new Chart(document.getElementById("line-chart"), {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-                data: [860, 1140, 1060, 1060, 1070, 1110, 1330],
-                borderColor: "red",
-                fill: false,
-                label: 'horror'
-            }, {
-                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000],
-                borderColor: "green",
-                fill: false,
-                label: 'family'
-            }, {
-                data: [300, 700, 2000, 5000, 6000, 4000, 2000],
-                borderColor: "blue",
-                fill: false
-                ,label: 'action'
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            legend: { display: true },
-            title: {
-                display: true,
-                text: 'number of views per category per year'
-            }
-        }
-    });</script>

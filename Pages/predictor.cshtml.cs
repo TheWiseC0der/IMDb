@@ -5,9 +5,9 @@ namespace IMDb.Pages
 {
     public class PredictorModel : PageModel
     {
-        private readonly ILogger<QuerierModel> _logger;
+        private readonly ILogger<QueryModel> _logger;
 
-        public PredictorModel(ILogger<QuerierModel> logger)
+        public PredictorModel(ILogger<QueryModel> logger)
         {
             _logger = logger;
         }

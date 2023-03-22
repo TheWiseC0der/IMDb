@@ -10,9 +10,10 @@
     <p>Here you'll find a tool to query the database with a limited set of parameters</p>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
+    
     var subjectObject = {
       "Actor": {
-        "Movie": ["Genre", "Images", "Tables", "Lists"],
+        "Movie": ["Action", "Thriller", "Adventure", "Horror", ],
         "Serie": ["Borders", "Margins", "Backgrounds", "Float"],
         "Both": ["Variables", "Operators", "Functions", "Conditions"]    
       },
@@ -54,15 +55,12 @@
     Subjects: <select name="subject" id="subject">
         <option value="" selected="selected">Select subject</option>
       </select>
-      <br><br>
     Types: <select name="topic" id="topic">
         <option value="" selected="selected">Please select subject first</option>
       </select>
-      <br><br>
     Genres: <select name="chapter" id="chapter">
         <option value="" selected="selected">Please select topic first</option>
       </select>
-      <br><br>
       <input type="submit" value="Submit">  
     </form>
 </div>

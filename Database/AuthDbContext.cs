@@ -55,7 +55,7 @@ public class AuthDbContext : DbContext
         modelBuilder.Entity<IsWriterFor>().HasKey(iwf => new { iwf.personId, iwf.titleId });
         modelBuilder.Entity<HasGenre>().HasKey(hg => new { hg.genreId, hg.titleId });
         modelBuilder.Entity<Principals>().HasKey(p => new { p.titleId, p.personId, p.categoryId });
-        modelBuilder.Entity<AlsoKnownAs>().HasKey(aka => new { aka.titleId, aka.regionId });
+        modelBuilder.Entity<AlsoKnownAs>().HasKey(aka => new { aka.titleId, aka.ordering });
 
         //
         //foreign key references

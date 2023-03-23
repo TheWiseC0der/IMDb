@@ -128,7 +128,7 @@
 
 
     new Chart(document.getElementById("bar-chart"), {
-        type: 'horizontalBar',
+        type: 'bar',
         data: {
 
             labels: xLabels,
@@ -142,6 +142,7 @@
             ]
         },
         options: {
+            indexAxis: 'y',
             scales: {
                 x: {
                     beginAtZero: true,

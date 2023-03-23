@@ -6,7 +6,7 @@
 }
 
 
-<div class="container-fluid text-center">
+< class="container-fluid text-center">
     <h1 class="display-4 p-2">Welcome, your Dashboard is ready!</h1>
     <p>Here you'll find relevant information about your database. all the statistics here are available on default</p>
     <div class="card col-3 col-md-10">
@@ -22,28 +22,53 @@
         </table>
     </div>
     <div class="row">
-        <div class="col-sm-4 py-2">
-            <div class="card card-body h-100">
-                <div class="h-100">
-                    <canvas id="record-chart"></canvas>
+        <div class="col-8">
+            <div class="col py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="Genre-Popularity"></canvas>
+                    </div>
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                            @foreach (genrePopularity gp in Model.genrePopularities)
+                            {
+                              <option value="gp.genreName"> gp.genreName </option>
+                            }
+                    </select>
+                    <label for="floatingSelect">select category</label>
+                </div>
+                </div>
+                
+            </div>
+            <div class="col py-2">
+                <div class="card card-body">
+                    <div class="card-body">
+                        <canvas id="Genre-Rating" height="600"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-4 py-2">
-            <div class="card h-100 text-white">
+            <div class="card text-white bg-light">
                 <div class="card-body">
-                    <canvas id="bar-chart"></canvas>
+                    <canvas id="bar-chart" height="800"></canvas>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4 py-2">
-            <div class="card h-100 card-body">
-                <div class="h-100">
-                    <canvas id="Genre-Rating"></canvas>
-                </div>
-            </div>
+        </div>  
+    </div>
+       <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">temporary</a>
+            <a class="dropdown-item" href="#">temporary</a>
+            
         </div>
     </div>
+
 </div>
 @*here i include chart.js for graphs in our application*@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -53,6 +78,8 @@
     var xValues2 = [];
     var xLabels2 = [];
     var xColors = [];
+    var gpValues = [];
+    var gpLabels = [];
     const randColor = () => {
         return "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
     }
@@ -67,6 +94,13 @@
         xLabels.push("@g.genreName");
     </script>
 }
+ @foreach (genrePopularity gp in Model.genrePopularities)
+    {
+            <script>
+            gpValues.push("@gp.number_of_votes");
+            gpLabels.push("@gp.startYear");
+    </script>
+    }
 <script>
     xValues2 = [6.9548260047158603, 6.3853054911059406, 7.0501656548633385, 7.0813475414535976, 7.1731594585671798, 6.937440780746492, 7.0957297329120124, 7.2379703689008172, 6.9876011898273207, 7.0804801927342016, 7.0077351772537133, 6.5021226415094464, 6.8911806753759048, 7.3083091522233889, 6.0792107513092093, 7.0387509573653571, 6.4996567954501066, 7.1292489776488983, 6.56722325817932, 6.019933554817275, 6.7794874507284996, 6.8139626257813184, 6.7820800015452734, 6.7921782070414585, 6.7791922915137781, 7.0102543554006969, 6.8898817677965397];
     xLabels2 = ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "Film-Noir", "Game-Show", "History", "Horror", "Music", "Musical", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"]
@@ -134,9 +168,27 @@
             labels: xLabels,
             datasets: [
                 {
-                    barThickness: 20,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ],
+                    borderWidth: 1,
+                    barThickness: 15,
                     label: "movies in db of this category",
-                    backgroundColor: xColors,
                     data: xValues
                 }
             ]
@@ -146,6 +198,9 @@
             scales: {
                 x: {
                     beginAtZero: true,
+                    ticks: {
+                        stepSize: 250000,
+                    }
                 },
             },
             maintainAspectRatio: false,
@@ -160,7 +215,7 @@
 
 
     new Chart(document.getElementById("Genre-Rating"), {
-        type: 'horizontalBar',
+        type: 'bar',
         data: {
 
             labels: xLabels2,
@@ -173,6 +228,7 @@
             ]
         },
         options: {
+            indexAxis: 'y',
             scales: {
                 x: {
                     beginAtZero: true,
@@ -196,23 +252,7 @@
         "#e8c3b9",
         "#1e7145"
     ];
-
-    new Chart("myChart", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: barColors,
-                data: yValues
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "World Wide Wine Production 2018"
-            }
-        }
-    });
+    
     new Chart("record-chart", {
         type: "pie",
         data: {
@@ -230,5 +270,24 @@
         }
     });
 
-
+   
+    new Chart(document.getElementById("Genre-Popularity"), {
+        type: 'line',
+        data: {
+            labels: gpLabels,
+            datasets: [
+                {
+                    label: "number of votes",
+                    data: gpValues,
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'popularity of a genre'
+            }
+        }
+    });
 </script>

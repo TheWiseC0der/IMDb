@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using System;
 
 namespace IMDb.Pages
 {
@@ -14,6 +15,8 @@ namespace IMDb.Pages
 
         public int moviecount;
         public List<Genre> genres = new();
+
+        public List<genrePopularity> genrePopularities= new();
 
         public IndexModel(ILogger<IndexModel> logger, CrudRepository crudRepo)
         {
@@ -27,14 +30,14 @@ namespace IMDb.Pages
             // Predicate<Movie> match = m => m.startYear > 1996; 
             //example of inner join:
             // movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
-            // movies = await _crudRepo.FindRowsWithValue<Movie>(movie => movie.isAdult && movie.startYear > 2016, 5);
+            genrePopularities = await _crudRepo.FindRowsWithValue<genrePopularity>(gp => gp.genreName == "Thriller" && gp.startYear > 1949);
             //
             // genres = await _crudRepo.Query(DbContext => DbContext.genre.Select(g => new Genre()
             // {
             //     genreName = g.genreName,
             //     avgRating = g.hasgenres.Average(hg => hg.title.rating.averageRating)
             // }).ToListOrDefault());
-            
+
             genres = await _crudRepo.Query(dbContext => dbContext.genre.Select(g =>
                 new Genre()
                 {

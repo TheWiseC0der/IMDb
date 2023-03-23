@@ -28,6 +28,8 @@ public class AuthDbContext : DbContext
     public DbSet<Short> _short { get; set; }
     public DbSet<TvMovie> tvmovie { get; set; }
     public DbSet<Video> video { get; set; }
+    public DbSet<genrePopularity> genrePopularity { get; set; }
+
 
 
     //Persons
@@ -56,7 +58,7 @@ public class AuthDbContext : DbContext
         modelBuilder.Entity<HasGenre>().HasKey(hg => new { hg.genreId, hg.titleId });
         modelBuilder.Entity<Principals>().HasKey(p => new { p.titleId, p.personId, p.categoryId });
         modelBuilder.Entity<AlsoKnownAs>().HasKey(aka => new { aka.titleId, aka.ordering });
-
+        modelBuilder.Entity<genrePopularity>().HasNoKey();
         //
         //foreign key references
         //

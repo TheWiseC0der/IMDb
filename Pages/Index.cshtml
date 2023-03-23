@@ -30,10 +30,10 @@
             </div>
         </div>
         <div class="row">
-        <div class="col-sm-4 py-2">
+        <div class="col py-2">
             <div class="card h-100 text-white">
                 <div class="card-body">
-                    <canvas id="bar-chart" height="400"></canvas>
+                    <canvas id="bar-chart" height="800"></canvas>
                 </div>
             </div>
         </div>
@@ -67,6 +67,7 @@ const randColor = () =>  {
     xLabels.push("@g.genreName");
     </script>
 }
+
 <script>
     new Chart(document.getElementById("bar-chart"), {
         type: 'bar',
@@ -75,8 +76,25 @@ const randColor = () =>  {
             labels: xLabels,
             datasets: [
                 {
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ],
                     label: "movies in db of this category",
-                    backgroundColor: xColors,
                     data: xValues
                 }
             ]

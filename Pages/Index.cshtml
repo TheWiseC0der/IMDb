@@ -6,7 +6,7 @@
 }
 
 
-< class="container-fluid text-center">
+<div class="container-fluid text-center">
     <h1 class="display-4 p-2">Welcome, your Dashboard is ready!</h1>
     <p>Here you'll find relevant information about your database. all the statistics here are available on default</p>
     <div class="card col-3 col-md-10">
@@ -28,17 +28,16 @@
                     <div class="card-body">
                         <canvas id="Genre-Popularity"></canvas>
                     </div>
-                <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <form class="form-floating" method="post" asp-page-handler="Genre">
+                    <select asp-for="selectedGenre" class="form-select" id="floatingSelect" aria-label="Floating label select example" onchange="this.form.submit()">
                         <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                            @foreach (genrePopularity gp in Model.genrePopularities)
+                            @foreach (var gp in Model.allGenres)
                             {
-                              <option value="gp.genreName"> gp.genreName </option>
+                              <option value="@gp.genreName"> @gp.genreName </option>
                             }
                     </select>
-                    <label for="floatingSelect">select category</label>
-                </div>
+                    <label for="floatingSelect">select genre</label>
+                </form>
                 </div>
                 
             </div>

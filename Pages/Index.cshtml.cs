@@ -15,13 +15,26 @@ namespace IMDb.Pages
 
         public int moviecount;
         public List<Genre> genres = new();
+        public List<Genre> allGenres = new();
 
-        public List<genrePopularity> genrePopularities= new();
+        public List<genrePopularity> genrePopularities = new();
+
+        [BindProperty] public string selectedGenre { get; set; } = "Thriller";
 
         public IndexModel(ILogger<IndexModel> logger, CrudRepository crudRepo)
         {
             _logger = logger;
             _crudRepo = crudRepo;
+            allGenres = _crudRepo.ReadAllRows<Genre>().Result;
+        }
+
+        public async Task OnPostGenre()
+        {
+            if (String.IsNullOrEmpty(selectedGenre)) return;
+            
+            genrePopularities =
+                await _crudRepo.FindRowsWithValue<genrePopularity>(gp =>
+                    gp.genreName == selectedGenre && gp.startYear > 1949);
         }
 
         public async Task OnGet()
@@ -30,7 +43,11 @@ namespace IMDb.Pages
             // Predicate<Movie> match = m => m.startYear > 1996; 
             //example of inner join:
             // movies = <movie, Director, string> (m => m.DirectorId, d => d.Id, (m, d) => new { MovieTitle = m.Title, DirectorName = d.Name }); ;
-            genrePopularities = await _crudRepo.FindRowsWithValue<genrePopularity>(gp => gp.genreName == "Thriller" && gp.startYear > 1949);
+
+            allGenres = await _crudRepo.ReadAllRows<Genre>();
+            genrePopularities =
+                await _crudRepo.FindRowsWithValue<genrePopularity>(gp =>
+                    gp.genreName == selectedGenre && gp.startYear > 1949);
             //
             // genres = await _crudRepo.Query(DbContext => DbContext.genre.Select(g => new Genre()
             // {

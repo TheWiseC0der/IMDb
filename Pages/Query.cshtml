@@ -50,6 +50,12 @@
         }
       }
     }
+        @foreach(var personPlaysInGenre in Model.personPlaysInGenres)
+        {
+                <p>Genre: @personPlaysInGenre.genre; </p>
+                <p>Person: @personPlaysInGenre.persoon; </p>
+                <p>Rating: @personPlaysInGenre.gemiddelde_rating; </p>
+        }
     </script>
     <form method="post" name="form1" id="form1">
     Subjects: <select name="subject" id="subject">

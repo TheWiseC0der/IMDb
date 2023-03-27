@@ -1,5 +1,6 @@
 ﻿using IMDb.Models;
 using IMDb.Models.Title_Person;
+using IMDb.Views;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,7 @@ public class AuthDbContext : DbContext
     public DbSet<TvMovie> tvmovie { get; set; }
     public DbSet<Video> video { get; set; }
     public DbSet<genrePopularity> genrePopularity { get; set; }
+    public DbSet<PersonGenreRating> PersonGenreRating { get; set; }
 
 
 
@@ -59,6 +61,7 @@ public class AuthDbContext : DbContext
         modelBuilder.Entity<Principals>().HasKey(p => new { p.titleId, p.personId, p.categoryId });
         modelBuilder.Entity<AlsoKnownAs>().HasKey(aka => new { aka.titleId, aka.ordering });
         modelBuilder.Entity<genrePopularity>().HasNoKey();
+        modelBuilder.Entity<PersonGenreRating>().HasNoKey();
         //
         //foreign key references
         //

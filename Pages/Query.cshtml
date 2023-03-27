@@ -1,5 +1,15 @@
 ﻿@page
+@using IMDb.Views
 @model QueryModel
+
+@functions {
+
+    public class personPlaysInGenre
+    {
+    }
+
+}
+
 @{
     ViewData["Title"] = "Query";
 }
@@ -50,24 +60,27 @@
         }
       }
     }
-        @foreach(var personPlaysInGenre in Model.personPlaysInGenres)
-        {
-                <p>Genre: @personPlaysInGenre.genre; </p>
-                <p>Person: @personPlaysInGenre.persoon; </p>
-                <p>Rating: @personPlaysInGenre.gemiddelde_rating; </p>
-        }
     </script>
+    @foreach (PersonGenreRating personPlaysInGenre in Model.personPlaysInGenres)
+    {
+        @personPlaysInGenre.genre
+        @personPlaysInGenre.persoon
+        @personPlaysInGenre.gemiddelde_rating
+    }
     <form method="post" name="form1" id="form1">
-    Subjects: <select name="subject" id="subject">
-        <option value="" selected="selected">Select subject</option>
-      </select>
-    Types: <select name="topic" id="topic">
-        <option value="" selected="selected">Please select subject first</option>
-      </select>
-    Genres: <select name="chapter" id="chapter">
-        <option value="" selected="selected">Please select topic first</option>
-      </select>
-      <input type="submit" value="Submit">  
+        Subjects:
+        <select name="subject" id="subject">
+            <option value="" selected="selected">Select subject</option>
+        </select>
+        Types:
+        <select name="topic" id="topic">
+            <option value="" selected="selected">Please select subject first</option>
+        </select>
+        Genres:
+        <select name="chapter" id="chapter">
+            <option value="" selected="selected">Please select topic first</option>
+        </select>
+        <input type="submit" value="Submit">
     </form>
 </div>
 

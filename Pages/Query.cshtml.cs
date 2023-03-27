@@ -11,21 +11,22 @@ namespace IMDb.Pages
     public class QueryModel : PageModel
     {
         private readonly CrudRepository _crudRepository;
-        public List<PersonGenreRating> personPlaysInGenres { get; set; }
+        public List<PersonGenreRating> personPlaysInGenres { get; set; } = new();
         private readonly ILogger<QueryModel> _logger;
+
         public QueryModel(CrudRepository crudRepository, ILogger<QueryModel> logger)
         {
             _crudRepository = crudRepository;
             _logger = logger;
             Genres = crudRepository.ReadAllRows<Genre>().Result;
+            personPlaysInGenres = _crudRepository.ReadAllRows<PersonGenreRating>().Result;
         }
 
-        
+
         public List<Genre>? Genres { get; set; }
 
         public async Task OnGet()
         {
-            personPlaysInGenres = await _crudRepository.ReadAllRows<PersonGenreRating>();
         }
     }
 }

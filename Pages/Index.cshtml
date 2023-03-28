@@ -92,9 +92,11 @@
     </script>
     }
 <script>
-    xValues2 = [@Model.genre.avgRating];    
+    xValues2 = [parseFloat(@Model.genre.avgRating).toFixed(2)];    
     xLabels2 = ["@Model.genre.genreName"];
 
+    console.log(xValues2)
+    
     //sorting the arrays real quick
     // Create an array of objects with label and data values
     let dataArr = [];
@@ -241,7 +243,7 @@
         "#e8c3b9",
         "#1e7145"
     ];
-    xValues2.push(10-xValues2[0])
+    xValues2.push(parseFloat(10-xValues2[0]).toFixed(2))
     new Chart(document.getElementById("genreRating-chart"), {
         type: "pie",
         data: {

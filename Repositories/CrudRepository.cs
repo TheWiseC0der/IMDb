@@ -281,12 +281,5 @@ namespace IMDb.Repositories
             //return result
             return result;
         }
-
-        /// <summary>
-        /// finds closest date out of all generic class type 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns>generic class type</returns>
-        public T? FindClosestToDate<T>() where T : class => ReadAllRows<T>().Result.GetClosestDate();
     }
 }

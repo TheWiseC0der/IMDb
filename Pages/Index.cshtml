@@ -187,7 +187,7 @@
                     ],
                     borderWidth: 1,
                     barThickness: 15,
-                    label: "movies in db of this category",
+                    label: "Movies per category",
                     data: xValues
                 }
             ]
@@ -220,7 +220,7 @@
             labels: xLabels2,
             datasets: [
                 {
-                    label: "movies in db of this category",
+                    label: "Rating per category",
                     backgroundColor: xColors,
                     data: xValues2,
                 }
@@ -273,10 +273,11 @@
     new Chart(document.getElementById("Genre-Popularity"), {
         type: 'line',
         data: {
+            
             labels: gpLabels,
             datasets: [
                 {
-                    label: "number of votes",
+                    label: "Number of votes per category",
                     data: gpValues,
                     fill: true,
                 }

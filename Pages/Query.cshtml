@@ -61,12 +61,12 @@
       }
     }
     </script>
-    @foreach (PersonGenreRating personPlaysInGenre in Model.personPlaysInGenres)
+    @*@#1#foreach (PersonGenreRating personPlaysInGenre in Model.personPlaysInGenres)#1#
     {
         @personPlaysInGenre.genre
         @personPlaysInGenre.persoon
         @personPlaysInGenre.gemiddelde_rating
-    }
+    }*@
     <form method="post" name="form1" id="form1">
         Subjects:
         <select name="subject" id="subject">

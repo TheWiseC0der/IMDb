@@ -24,35 +24,6 @@ namespace IMDb.Repositories
         public static List<T> ToListOrDefault<T>(this IEnumerable<T>? seq) =>
             seq == null ? new List<T>() : seq.ToList();
 
-
-        /// <summary>
-        /// finds closest date from <see cref="IEnumerable{T}"/>
-        /// </summary>
-        /// <param name="seq"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns>generic class type</returns>
-        public static T? GetClosestDate<T>(this IEnumerable<T> seq) =>
-            seq.MinBy(obj =>
-            {
-            //find all datetime objects in T
-                var date = GetPropertyValueByType(obj, typeof(DateTime));
-
-            //if date is null make a new datetime
-                var dateTime = (DateTime)(date ?? new DateTime(2000, 0, 0));
-
-            //return the difference
-                return DateDifference(dateTime);
-            });
-
-        /// <summary>
-        /// orders the <see cref="IEnumerable{T}"/> by date and converts it to a list
-        /// </summary>
-        /// <param name="seq"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static List<T> OrderByDateList<T>(this IEnumerable<T>? seq) =>
-            (seq ?? Array.Empty<T>()).OrderBy(obj => GetPropertyValueByType(obj, typeof(DateTime)))
-            .ToList();
     }
 
 }

@@ -11,7 +11,7 @@ namespace IMDb.Pages
     public class QueryModel : PageModel
     {
         private readonly CrudRepository _crudRepository;
-        public List<PersonGenreRating> personPlaysInGenres { get; set; } = new();
+        //public List<PersonGenreRating> personPlaysInGenres { get; set; } = new();
         private readonly ILogger<QueryModel> _logger;
 
         public QueryModel(CrudRepository crudRepository, ILogger<QueryModel> logger)
@@ -19,7 +19,7 @@ namespace IMDb.Pages
             _crudRepository = crudRepository;
             _logger = logger;
             Genres = crudRepository.ReadAllRows<Genre>().Result;
-            personPlaysInGenres = _crudRepository.ReadAllRows<PersonGenreRating>().Result;
+            //personPlaysInGenres = _crudRepository.ReadAllRows<PersonGenreRating>().Result;
         }
 
 

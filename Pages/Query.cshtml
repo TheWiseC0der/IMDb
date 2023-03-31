@@ -17,12 +17,12 @@
 
 <div class="container-fluid text-center">
     <div class="row">
-        
-    
-    <h1 class="display-4 p-2">Query page!</h1>
-    <p>Here you'll find a tool to query the database with a limited set of parameters</p>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script>
+
+
+        <h1 class="display-4 p-2">Query page!</h1>
+        <p>Here you'll find a tool to query the database with a limited set of parameters</p>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
     
     var subjectObject = {
       "Actor": {
@@ -64,52 +64,106 @@
       }
     }
     </script>
-   <div class="form-group">
-       <form method="post">
-           <div class="row">
-               <div class="col">
-                   <div class="form-floating">
-                       <select asp-for="selectActorOrMovie" class="form-select" id="floatingSelectOne">
-                           <option value="Actor">Actor</option>
-                           <option value="Movie">Movie</option>
-                       </select>
-                       <label for="floatingSelectOne">Select Actor or Movie</label>
-                   </div>
-               </div>
-               <div class="col">
-                   <div class="form-floating">
-                       <select asp-for="selectedGenre" class="form-select" id="floatingSelect">
-                           <option selected>Open this select menu</option>
-                           @foreach (var gp in Model.Genres)
-                           {
-                               <option value="@gp.genreName"> @gp.genreName </option>
-                           }
-                       </select>
-                       <label for="floatingSelect">Select Genre</label>
-                   </div>
-               </div>
-               <div class="col">
-                    <button type="submit" asp-page-handler="Table" class="btn btn-primary">Submit</button>
-               </div>
-           </div>
-       </form>
-   </div>
+        <div class="form-group">
+            <form method="post">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <select asp-for="selectedActorOrWriterOrDirector" class="form-select" id="floatingSelectOne">
+                                <option value="Actor">Actor</option>
+                                <option value="Director">Director</option>
+                                <option value="Writer">Writer</option>
+                            </select>
+                            <label for="floatingSelectOne">Select actor, director or writer.</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <select asp-for="selectedGenre" class="form-select" id="floatingSelect">
+                                <option selected>Open this select menu</option>
+                                @foreach (var gp in Model.Genres)
+                                {
+                                    <option value="@gp.genreName"> @gp.genreName </option>
+                                }
+                            </select>
+                            <label for="floatingSelect">Select Genre</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" asp-for="selectedSuccesfulTitles" class="form-control" id="floatingSelectTwo">
+                            <label for="floatingSelectTwo">Select how many succesful titles</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button type="submit" asp-page-handler="Table" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Average rating</th>
+                <th scope="col">Succesful titles</th>
 
-    @* <form method="post" name="form1" id="form1"> *@
-    @*     Subjects: *@
-    @*     <select name="subject" id="subject"> *@
-    @*         <option value="" selected="selected">Select subject</option> *@
-    @*     </select> *@
-    @*     Types: *@
-    @*     <select name="topic" id="topic"> *@
-    @*         <option value="" selected="selected">Please select subject first</option> *@
-    @*     </select> *@
-    @*     Genres: *@
-    @*     <select name="chapter" id="chapter"> *@
-    @*         <option value="" selected="selected">Please select topic first</option> *@
-    @*     </select> *@
-    @*     <input type="submit" value="Submit"> *@
-    @* </form> *@
+            </tr>
+            </thead>
+
+            @foreach (var actor in Model.PersonCombosTwos)
+            {
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>@actor.personName</td>
+                    <td>@actor.movie_average_rating</td>
+                    <td>@actor.played_in_succesful_titles</td>
+                </tr>
+                </tbody>
+            }
+            @foreach (var director in Model.DirectorComboTwos)
+            {
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>@director.personName</td>
+                    <td>@director.movie_average_rating</td>
+                    <td>@director.played_in_succesful_titles</td>
+                </tr>
+                </tbody>
+            }
+            @foreach (var writer in Model.WriterComboTwos)
+            {
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>@writer.personName</td>
+                    <td>@writer.movie_average_rating</td>
+                    <td>@writer.played_in_succesful_titles</td>
+                </tr>
+                </tbody>
+            }
+
+        </table>
+
+
+        @* <form method="post" name="form1" id="form1"> *@
+        @*     Subjects: *@
+        @*     <select name="subject" id="subject"> *@
+        @*         <option value="" selected="selected">Select subject</option> *@
+        @*     </select> *@
+        @*     Types: *@
+        @*     <select name="topic" id="topic"> *@
+        @*         <option value="" selected="selected">Please select subject first</option> *@
+        @*     </select> *@
+        @*     Genres: *@
+        @*     <select name="chapter" id="chapter"> *@
+        @*         <option value="" selected="selected">Please select topic first</option> *@
+        @*     </select> *@
+        @*     <input type="submit" value="Submit"> *@
+        @* </form> *@
     </div>
 </div>
 

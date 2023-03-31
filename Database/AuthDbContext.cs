@@ -32,6 +32,8 @@ public class AuthDbContext : DbContext
     public DbSet<genrePopularity> genrePopularity { get; set; }
     public DbSet<PersonGenreRating> PersonGenreRating { get; set; }
     public DbSet<PersonComboTwo> PersonComboTwo { get; set; }
+    public DbSet<DirectorComboTwo> DirectorComboTwo { get; set; }
+    public DbSet<WriterComboTwo> WriterComboTwo { get; set; }
 
 
 
@@ -64,6 +66,8 @@ public class AuthDbContext : DbContext
         modelBuilder.Entity<genrePopularity>().HasNoKey();
         modelBuilder.Entity<PersonGenreRating>().HasNoKey();
         modelBuilder.Entity<PersonComboTwo>().HasNoKey();
+        modelBuilder.Entity<DirectorComboTwo>().HasNoKey();
+        modelBuilder.Entity<WriterComboTwo>().HasNoKey();
         //
         //foreign key references
         //

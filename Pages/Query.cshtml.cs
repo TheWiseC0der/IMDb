@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using IMDb.Models.Title_Person;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using NpgsqlTypes;
@@ -14,11 +15,14 @@ namespace IMDb.Pages
     public class QueryModel : PageModel
     {
         private readonly CrudRepository _crudRepository;
-        public List<PersonComboTwo> PersonCombosTwo { get; set; } = new();
+        public List<PersonComboTwo> PersonCombosTwos { get; set; } = new();
+        public List<DirectorComboTwo> DirectorComboTwos { get; set; } = new();
+        public List<WriterComboTwo> WriterComboTwos { get; set; } = new();
         private readonly ILogger<QueryModel> _logger;
         public List<Genre>? Genres { get; set; }
         [BindProperty] public string selectedGenre { get; set; } = "Thriller";
-        [BindProperty] public string selectActorOrMovie { get; set; } = "Actor";
+        [BindProperty] public string selectedActorOrWriterOrDirector { get; set; } = "Actor";
+        [BindProperty] public int selectedSuccesfulTitles { get; set; } = 5;
 
         public QueryModel(CrudRepository crudRepository, ILogger<QueryModel> logger)
         {
@@ -37,24 +41,25 @@ namespace IMDb.Pages
         public async Task OnPostTable()
         {
             // Checking if the selected genre is null or empty, and returning if so
-            if (String.IsNullOrEmpty(selectedGenre) || String.IsNullOrEmpty(selectActorOrMovie)) return;
+            if (String.IsNullOrEmpty(selectedGenre) || String.IsNullOrEmpty(selectedActorOrWriterOrDirector)) return;
             
                 
 
-            if (selectActorOrMovie == "Actor")
+            if (selectedActorOrWriterOrDirector == "Actor")
             {
-                /*int x = _crudRepository.Query(context => context.person
-                    .Where(p => p.principals.Any(
-                        pc => pc.title.hasgenres.Any(tg => tg.genre.genreName == selectedGenre)))
-                    .Select(p => new Person()
-                    {
-                        personName = p.personName,
-                        AverageRating = p.principals.Average(pc => pc.title.rating.averageRating)
-                    })
-                    .Count()).Result;*/
-                // FindRowsWithValue<PersonGenreRating>(x => x.genre == selectedGenre, 10).Result;
-                PersonCombosTwo = await _crudRepository.FindRowsWithValue<PersonComboTwo>(x =>
-                    x.genreName == selectedGenre);
+                PersonCombosTwos = await _crudRepository.FindRowsWithValue<PersonComboTwo>(x =>
+                    x.genreName == selectedGenre && x.played_in_succesful_titles >= selectedSuccesfulTitles, 10);
+            }
+
+            if (selectedActorOrWriterOrDirector == "Director")
+            {
+                DirectorComboTwos = await _crudRepository.FindRowsWithValue<DirectorComboTwo>(x =>
+                    x.genreName == selectedGenre && x.played_in_succesful_titles >= selectedSuccesfulTitles, 10);
+            }
+            if (selectedActorOrWriterOrDirector == "Writer")
+            {
+                WriterComboTwos = await _crudRepository.FindRowsWithValue<WriterComboTwo>(x =>
+                    x.genreName == selectedGenre && x.played_in_succesful_titles >= selectedSuccesfulTitles, 10);
             }
 
         }

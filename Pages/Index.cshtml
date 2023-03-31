@@ -44,7 +44,7 @@
             <div class="col py-2">
                 <div class="card card-body">
                     <div class="card-body">
-                        <canvas id="genreRating-chart" height="600"></canvas>
+                        <canvas id="bar-chart" height="600"></canvas>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
         <div class="col-sm-4 py-2">
             <div class="card text-white bg-light">
                 <div class="card-body">
-                    <canvas id="bar-chart" height="800"></canvas>
+                    <canvas id="genreRating-chart" height="800"></canvas>
                 </div>
             </div>
         </div>  
@@ -161,8 +161,7 @@
                 {
                     backgroundColor:
                         'rgb(245, 197, 24)',
-                    borderColor:
-                        'rgb(0, 0, 0)',
+                    borderColor: 'rgb(0, 0, 0)',
                     borderWidth: 1,
                     barThickness: 15,
                     label: "Movies per category",
@@ -231,11 +230,14 @@
     ];
     xValues2.push(parseFloat(10-xValues2[0]).toFixed(2))
     new Chart(document.getElementById("genreRating-chart"), {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: xLabels2,
             datasets: [{
-                backgroundColor: barColors,
+                backgroundColor: [
+                    'rgb(245, 197, 24)',
+                    'rgb(224, 224, 224)'
+                ],
                 data: xValues2
             }]
         },

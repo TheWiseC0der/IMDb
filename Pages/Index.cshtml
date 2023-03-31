@@ -44,7 +44,7 @@
             <div class="col py-2">
                 <div class="card card-body">
                     <div class="card-body">
-                        <canvas id="Genre-Rating" height="600"></canvas>
+                        <canvas id="genreRating-chart" height="600"></canvas>
                     </div>
                 </div>
             </div>
@@ -57,16 +57,7 @@
             </div>
         </div>  
     </div>
-       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">temporary</a>
-            <a class="dropdown-item" href="#">temporary</a>
-            
-        </div>
-    </div>
+       
 
 </div>
 @*here i include chart.js for graphs in our application*@
@@ -101,10 +92,11 @@
     </script>
     }
 <script>
-    xValues2 = [6.9548260047158603, 6.3853054911059406, 7.0501656548633385, 7.0813475414535976, 7.1731594585671798, 6.937440780746492, 7.0957297329120124, 7.2379703689008172, 6.9876011898273207, 7.0804801927342016, 7.0077351772537133, 6.5021226415094464, 6.8911806753759048, 7.3083091522233889, 6.0792107513092093, 7.0387509573653571, 6.4996567954501066, 7.1292489776488983, 6.56722325817932, 6.019933554817275, 6.7794874507284996, 6.8139626257813184, 6.7820800015452734, 6.7921782070414585, 6.7791922915137781, 7.0102543554006969, 6.8898817677965397];
-    xLabels2 = ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "Film-Noir", "Game-Show", "History", "Horror", "Music", "Musical", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"]
+    xValues2 = [parseFloat(@Model.genre.avgRating).toFixed(2)];    
+    xLabels2 = ["@Model.genre.genreName"];
 
-
+    console.log(xValues2)
+    
     //sorting the arrays real quick
     // Create an array of objects with label and data values
     let dataArr = [];
@@ -251,20 +243,20 @@
         "#e8c3b9",
         "#1e7145"
     ];
-    
-    new Chart("record-chart", {
+    xValues2.push(parseFloat(10-xValues2[0]).toFixed(2))
+    new Chart(document.getElementById("genreRating-chart"), {
         type: "pie",
         data: {
-            labels: xValues,
+            labels: xLabels2,
             datasets: [{
                 backgroundColor: barColors,
-                data: yValues
+                data: xValues2
             }]
         },
         options: {
             title: {
                 display: true,
-                text: "Records in db per table"
+                text: "Average rating for this category"
             }
         }
     });

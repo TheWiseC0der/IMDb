@@ -19,6 +19,7 @@ namespace IMDb.Pages
         // Public properties for movie count, genres, all genres and genre popularities
         public int moviecount;
         public List<Genre> genres = new();
+        public Genre? genre = new();
         public List<Genre> allGenres = new();
         public List<genrePopularity> genrePopularities = new();
 
@@ -43,6 +44,13 @@ namespace IMDb.Pages
 
             // Reading all genres from the database and setting them to the allGenres property
             allGenres = _crudRepo.ReadAllRows<Genre>().Result;
+
+            // Retrieves a genre by name and returns corresponding rating and name
+            genre = _crudRepo.Query(DbContext => DbContext.genre.Select(g => new Genre()
+            {
+                genreName = g.genreName,
+                avgRating = g.hasgenres.Average(hg => hg.title.rating.averageRating)
+            }).FirstOrDefault(g => g.genreName == selectedGenre)).Result;
         }
 
         // Method for handling the post request to filter by genre

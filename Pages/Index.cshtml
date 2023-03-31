@@ -76,12 +76,12 @@
 
 </script>
 
-@foreach (Genre g in Model.genres)
+@foreach (var g in Model.genres)
 {
     <script>
         xColors.push(randColor());
-        xValues.push("@g.titleCount");
-        xLabels.push("@g.genreName");
+        xValues.push("@g.Value");
+        xLabels.push("@g.Key");
     </script>
 }
  @foreach (genrePopularity gp in Model.genrePopularities)
@@ -92,8 +92,8 @@
     </script>
     }
 <script>
-    xValues2 = [parseFloat(@Model.genre.avgRating).toFixed(2)];    
-    xLabels2 = ["@Model.genre.genreName"];
+    xValues2 = [parseFloat(@Model.genre.Value).toFixed(2)];    
+    xLabels2 = ["@Model.genre.Key"];
 
     console.log(xValues2)
     

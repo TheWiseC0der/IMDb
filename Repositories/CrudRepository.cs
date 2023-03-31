@@ -248,10 +248,10 @@ namespace IMDb.Repositories
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>list of rows</returns>
-        public async Task<dynamic?> Query(Func<AuthDbContext, dynamic?> func)
+        public async Task<T?> Query<T>(Func<AuthDbContext, T?> func)
         {
             //create new generic list
-            dynamic? result = null;
+            T? result = default(T);
 
             //read all rows from database
             await Template(context => result = func(context));

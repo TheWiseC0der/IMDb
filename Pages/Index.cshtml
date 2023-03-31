@@ -86,16 +86,16 @@
 }
  @foreach (genrePopularity gp in Model.genrePopularities)
     {
-            <script>
+        <script>
             gpValues.push("@gp.number_of_votes");
             gpLabels.push("@gp.startYear");
-    </script>
+        </script>
     }
 <script>
     xValues2 = [parseFloat(@Model.genre.Value).toFixed(2)];    
     xLabels2 = ["@Model.genre.Key"];
 
-    console.log(xValues2)
+    console.log(xValues)
     
     //sorting the arrays real quick
     // Create an array of objects with label and data values

@@ -16,6 +16,9 @@
 
 
 <div class="container-fluid text-center">
+    <div class="row">
+        
+    
     <h1 class="display-4 p-2">Query page!</h1>
     <p>Here you'll find a tool to query the database with a limited set of parameters</p>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,27 +64,53 @@
       }
     }
     </script>
-    @*@#1#foreach (PersonGenreRating personPlaysInGenre in Model.personPlaysInGenres)#1#
-    {
-        @personPlaysInGenre.genre
-        @personPlaysInGenre.persoon
-        @personPlaysInGenre.gemiddelde_rating
-    }*@
-    <form method="post" name="form1" id="form1">
-        Subjects:
-        <select name="subject" id="subject">
-            <option value="" selected="selected">Select subject</option>
-        </select>
-        Types:
-        <select name="topic" id="topic">
-            <option value="" selected="selected">Please select subject first</option>
-        </select>
-        Genres:
-        <select name="chapter" id="chapter">
-            <option value="" selected="selected">Please select topic first</option>
-        </select>
-        <input type="submit" value="Submit">
-    </form>
+   <div class="form-group">
+       <form method="post">
+           <div class="row">
+               <div class="col">
+                   <div class="form-floating">
+                       <select asp-for="selectActorOrMovie" class="form-select" id="floatingSelectOne">
+                           <option value="Actor">Actor</option>
+                           <option value="Movie">Movie</option>
+                       </select>
+                       <label for="floatingSelectOne">Select Actor or Movie</label>
+                   </div>
+               </div>
+               <div class="col">
+                   <div class="form-floating">
+                       <select asp-for="selectedGenre" class="form-select" id="floatingSelect">
+                           <option selected>Open this select menu</option>
+                           @foreach (var gp in Model.Genres)
+                           {
+                               <option value="@gp.genreName"> @gp.genreName </option>
+                           }
+                       </select>
+                       <label for="floatingSelect">Select Genre</label>
+                   </div>
+               </div>
+               <div class="col">
+                    <button type="submit" asp-page-handler="Table" class="btn btn-primary">Submit</button>
+               </div>
+           </div>
+       </form>
+   </div>
+
+    @* <form method="post" name="form1" id="form1"> *@
+    @*     Subjects: *@
+    @*     <select name="subject" id="subject"> *@
+    @*         <option value="" selected="selected">Select subject</option> *@
+    @*     </select> *@
+    @*     Types: *@
+    @*     <select name="topic" id="topic"> *@
+    @*         <option value="" selected="selected">Please select subject first</option> *@
+    @*     </select> *@
+    @*     Genres: *@
+    @*     <select name="chapter" id="chapter"> *@
+    @*         <option value="" selected="selected">Please select topic first</option> *@
+    @*     </select> *@
+    @*     <input type="submit" value="Submit"> *@
+    @* </form> *@
+    </div>
 </div>
 
 @*here i include chart.js for graphs in our application*@

@@ -31,6 +31,7 @@ public class AuthDbContext : DbContext
     public DbSet<Video> video { get; set; }
     public DbSet<genrePopularity> genrePopularity { get; set; }
     public DbSet<PersonGenreRating> PersonGenreRating { get; set; }
+    public DbSet<PersonComboTwo> PersonComboTwo { get; set; }
 
 
 
@@ -62,6 +63,7 @@ public class AuthDbContext : DbContext
         modelBuilder.Entity<AlsoKnownAs>().HasKey(aka => new { aka.titleId, aka.ordering });
         modelBuilder.Entity<genrePopularity>().HasNoKey();
         modelBuilder.Entity<PersonGenreRating>().HasNoKey();
+        modelBuilder.Entity<PersonComboTwo>().HasNoKey();
         //
         //foreign key references
         //
